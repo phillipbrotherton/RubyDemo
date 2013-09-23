@@ -1,0 +1,26 @@
+# Logfile created on 2013-09-23 12:12:44 -0400 by logger.rb/36483
+I, [2013-09-23T12:12:44.929192 #13077]  INFO -- : ********************  MyVanilla CHW - Start Execution **************************
+I, [2013-09-23T12:12:45.294031 #13077]  INFO -- : Entering into - 'Create Excel object' .. 
+I, [2013-09-23T12:12:47.953338 #13077]  INFO -- : Opening new Browser instance......
+I, [2013-09-23T12:12:59.048132 #13077]  INFO -- : Go to - https://www.myvanilladebitcard.com
+I, [2013-09-23T12:12:59.205177 #13077]  INFO -- : Entering into - 'Check if CHW is loaded' .. 
+I, [2013-09-23T12:12:59.218027 #13077]  INFO -- : MyVanilla CHW is loaded..
+I, [2013-09-23T12:12:59.219367 #13077]  INFO -- : Entering into - 'Login Module' .. 
+I, [2013-09-23T12:12:59.220878 #13077]  INFO -- : Entering into - 'Get Test Data' .. 
+I, [2013-09-23T12:12:59.228788 #13077]  INFO -- : Fetching UserID and Password..... 
+I, [2013-09-23T12:12:59.823093 #13077]  INFO -- : Setting User Name... :  rpulijala
+I, [2013-09-23T12:12:59.996823 #13077]  INFO -- : Setting Password... : *********** 
+I, [2013-09-23T12:13:06.028423 #13077]  INFO -- : Entering into - 'CHW Account Module' ..
+I, [2013-09-23T12:13:06.055568 #13077]  INFO -- : MyVanilla CHW - Login successful
+I, [2013-09-23T12:13:06.301439 #13077]  INFO -- : CHW Account Balance - Check' successful -  Available Balance $30.00
+I, [2013-09-23T12:13:06.510854 #13077]  INFO -- : CHW Card Status - Check' successful -  Card Status - Active
+I, [2013-09-23T12:13:13.811394 #13077]  INFO -- : Card Holder Information Page loaded
+I, [2013-09-23T12:13:14.036896 #13077]  INFO -- : FIRST NAME
+Raghuram -  LAST NAME
+Pulijala - Check successful
+I, [2013-09-23T12:13:14.216885 #13077]  INFO -- : Email - raghuram.pulijala@hotmail.com - Check successful
+I, [2013-09-23T12:13:22.387844 #13077]  INFO -- : CHW MyVanilla - Sign Out complete
+I, [2013-09-23T12:13:25.543236 #13077]  INFO -- : Entering into - 'Close Browser' Module
+I, [2013-09-23T12:13:30.748668 #13077]  INFO -- : CHW Automation for Card Check Complete
+I, [2013-09-23T12:13:30.748761 #13077]  INFO -- : ********************  MyVanilla CHW - End Execution **************************
+I, [2013-09-23T12:13:31.096843 #13077]  INFO -- : Sending Results in an email
