@@ -8,19 +8,16 @@ require 'logger'                    # For Log File
 require 'prawn'                     # For PDF Report
 require 'spreadsheet'               # For using as Input File - Data Driven
 require 'pony'                      # For handling smtp mail server
+require_relative 'common_functions' # For reusing Common Functions
 require 'date'                    
 require 'time'
 
+include CHWCommonFunctions
 
 browser_new = "chrome"
 url = "https://www.myvanilladebitcard.com"
-#Deleting the old Log files
-if File.exists?("/Users/Sneha/RubyProjects/RubyDemo/CHW_Automation.log")
-  File.delete("CHW_Automation.log")
-end
-if File.exists?("/Users/Sneha/RubyProjects/RubyDemo/CHW_Automation.pdf")
-  File.delete("CHW_Automation.pdf")
-end
+
+delete_log_files 
 
 #Using Log File
 $LOG = Logger.new('CHW_Automation.log') 
@@ -44,7 +41,7 @@ end
 
 pdf.grid([0,3.6], [1,4]).bounding_box do 
   # Assign the path to your file name first to a local variable.
-  logo_path = File.expand_path('/Users/Sneha/RubyProjects/RubyDemo/myvanilla.png', __FILE__)
+  logo_path = File.expand_path('/Users/Sneha/Pictures/myvanilla.png', __FILE__)
    
   # Displays the image in your PDF. Dimensions are optional.
   pdf.image logo_path, :width => 150, :height => 45, :position => :left
