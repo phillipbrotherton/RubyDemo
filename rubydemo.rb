@@ -28,7 +28,6 @@ $LOG = Logger.new('CHW_Automation.log')
 pdf = Prawn::Document.new
 
 
-$LOG.info "********************  MyVanilla CHW - Start Execution **************************" 
 
 #Write to PDF
 
@@ -51,16 +50,18 @@ pdf.stroke_horizontal_rule
 pdf.move_down 10
 
 browsers.each do |browser_new| 
+  $LOG.info "********************  MyVanilla CHW - #{browser_new} - Start Execution **************************" 
     pdf.text "Browser - #{browser_new}", :style => :bold_italic
     pdf.move_down 20
-    pdf.text "#{Time.now} : MyVanilla - Ruby Automation Script - Start Execution"
+    pdf.text "#{Time.now} : MyVanilla - #{browser_new} - Ruby Automation Script - Start Execution"
 
     #Using Terminal Notifier
-    TerminalNotifier.notify "MyVanilla CHW - Start Execution"
+    TerminalNotifier.notify "MyVanilla CHW - #{browser_new} - Start Execution"
 
     #Using TestData.xls to fetch Id,pwd
     $LOG.info "Entering into - 'Create Excel object' .. " 
     pdf.text "#{Time.now} : Entering into - 'Create Excel object' .. " 
+    TerminalNotifier.notify "Creating Excel Object"
     excel_file = File.join(File.dirname(__FILE__), "", "testdata.xls") 
     excel_book = Spreadsheet.open excel_file
     sheet1 = excel_book.worksheet(0) # first sheet
@@ -180,9 +181,9 @@ browsers.each do |browser_new|
   
         if strFirstName.include? "Raghuram" 
           if strLastName.include? "Pulijala"
-          $LOG.info "#{strFirstName} -  #{strLastName} - Check successful"
-          pdf.text "#{Time.now} :  #{strFirstName} - #{strLastName} - Check successful"
-          TerminalNotifier.notify "Card Holder Info - Name Check"
+          $LOG.info "#{strFirstName} #{strLastName} - Check successful"
+          pdf.text "#{Time.now} :  #{strFirstName} #{strLastName} - Check successful"
+          TerminalNotifier.notify "#{strFirstName} #{strLastName} - Card Holder Info - Name Check"
           end
         else
           $LOG.info "Name - Check Failed"
@@ -219,26 +220,23 @@ browsers.each do |browser_new|
     end  
   
     #Close Browser
-    TerminalNotifier.notify "Closing the Browser"
+    TerminalNotifier.notify "#{browser_new} - Closing the Browser"
 
     sleep 3
     $LOG.info "Entering into - 'Close Browser' Module" 
-    pdf.text "#{Time.now} : Entering into - 'Close Browser' Module" 
+    pdf.text "#{Time.now} : Entering into - #{browser_new} - 'Close Browser' Module" 
     browser.close
 
     #finalizing comments
     $LOG.info "CHW Automation for Card Check Complete"
-    $LOG.info "********************  MyVanilla CHW - End Execution **************************"
+    $LOG.info "********************  MyVanilla CHW - #{browser_new} - End Execution **************************"
     pdf.text "#{Time.now} : CHW Automation for Card Check Complete"
-    pdf.text "#{Time.now} : MyVanilla CHW - End Execution"
-    TerminalNotifier.notify "MyVanilla CHW - End Execution"
+    pdf.text "#{Time.now} : MyVanilla CHW - #{browser_new} - End Execution"
+    TerminalNotifier.notify "MyVanilla CHW - #{browser_new} - End Execution"
     pdf.move_down 10
     pdf.stroke_horizontal_rule
     pdf.move_down 10
-    pdf.bounding_box([pdf.bounds.right - 50, pdf.bounds.bottom], :width => 60, :height => 20) do
-      pagecount = pdf.page_count
-      pdf.text "Page #{pagecount}"
-    end
+    
 end
 
 #Send Email
@@ -247,7 +245,10 @@ $LOG.info "Sending Results in an email"
 pdf.text "#{Time.now} : Sending Results in an email"
 pdf.move_down 10
 pdf.stroke_horizontal_rule
-
+pdf.bounding_box([pdf.bounds.right - 50, pdf.bounds.bottom], :width => 60, :height => 20) do
+  pagecount = pdf.page_count
+  pdf.text "Page #{pagecount}"
+end
 
 pdf.render_file "CHW_Automation.pdf"
 
@@ -972,7 +973,7 @@ Pony.mail(
 
 
 </body></html>', 
-  :attachments => {"CHW_Automation.pdf" => File.read("/Users/Sneha/RubyProjects/CHW_Automation.pdf")}
+  :attachments => {"CHW_Automation.pdf" => File.read("/Users/Sneha/RubyProjects/RubyAutomation/CHW_Automation.pdf")}
 )
 
 
