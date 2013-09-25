@@ -263,23 +263,44 @@ Pony.mail(
   :cc => cc_addresses,
   :from => 'raghuram.pulijala@gmail.com', 
   :subject => 'MyVanilla CHW Automation Results - PDF Report',
-  :body => '<html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
+  :html_body => '
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
+
 
 <div bgcolor="#DEDEDE" lang="EN-US" link="blue" vlink="purple">
+
+
+
 <div>
+
+
+
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
+
  <tr>
+
   <td style="padding:0in 0in 0in 0in">
+
   <div align="center">
+
   <table border="0" cellspacing="0" cellpadding="0" width="640">
+
    <tr style="height:15.0pt">
+
     <td width="640" style="width:480.0pt;padding:0in 0in 0in 0in;height:15.0pt"></td>
+
    </tr>
+
    <tr>
+
     <td width="640" style="width:480.0pt;padding:0in 0in 0in 0in">
+
     <table border="0" cellspacing="0" cellpadding="0" width="640" style="width:480.0pt;background:#c7c7c7;border-collapse:collapse">
+
      <tr>
+
       <td width="15" style="width:11.25pt;padding:0in 0in 0in 0in"></td>
+
       <td width="350" style="width:262.5pt;padding:0in 0in 0in 0in">
 
       <table border="0" cellspacing="0" cellpadding="0" width="350">
@@ -443,6 +464,12 @@ Pony.mail(
         generated email, attached is the Ruby CHW Automation Script results and
 
         logs</p>
+
+        <p><span style="color:windowtext">Below is the Ruby
+
+        Automation – Logic flow</span></p>
+
+        <p><span><img width="576" height="675" src="https://raw.github.com/rpulijala/RubyDemo/master/RubyDemoLogicFlow.jpg"></span></p>
 
         </td>
 

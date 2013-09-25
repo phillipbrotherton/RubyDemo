@@ -17,7 +17,43 @@ Pony.mail(
   :cc => cc_addresses,
   :from => 'raghuram.pulijala@gmail.com', 
   :subject => 'MyVanilla CHW Automation Results - PDF Report',
-  :html_body => '<html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
+  :html_body => '
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div bgcolor="#DEDEDE" lang="EN-US" link="blue" vlink="purple">
@@ -217,6 +253,12 @@ Pony.mail(
         generated email, attached is the Ruby CHW Automation Script results and
 
         logs</p>
+
+        <p><span style="color:windowtext">Below is the Ruby
+
+        Automation – Logic flow</span></p>
+
+        <p><span><img width="576" height="675" src="https://raw.github.com/rpulijala/RubyDemo/master/RubyDemoLogicFlow.jpg"></span></p>
 
         </td>
 
