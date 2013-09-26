@@ -54,7 +54,7 @@ pdf.move_down 10
 browsers.each do |browser_new| 
   $LOG.info "********************  MyVanilla CHW - #{browser_new} - Start Execution **************************" 
     
-    pdf.move_down 20
+    pdf.move_down 30
     pdf.stroke_horizontal_rule
     pdf.move_down 5
     pdf.text "Browser - #{browser_new}", :style => :bold_italic
@@ -110,6 +110,7 @@ browsers.each do |browser_new|
     #Login in MyVanilla CHW
       $LOG.info "Entering into - 'Login Module' .. " 
       pdf.text "#{Time.now} : Entering into - 'Login Module' .. "
+    
     #Fetch userid,passwd
       $LOG.info "Entering into - 'Get Test Data' .. "
       pdf.text "#{Time.now} : Entering into - 'Get Test Data' .. " 
@@ -119,17 +120,20 @@ browsers.each do |browser_new|
       $LOG.info "Fetching UserID and Password..... " 
       pdf.text "#{Time.now} : Fetching UserID and Password..... " 
       TerminalNotifier.notify "Setting MyVanilla CHW uid and pwd"
-
+    
+    #Set Uid
       browser.div(:id, "signup_form").flash
       browser.text_field(:id=>'user_id').set(login)
       $LOG.info "Setting User Name... :  #{login}" 
       pdf.text "#{Time.now} : Setting User Name... :  #{login}"
-  
+    
+    #Set Pwd
       browser.text_field(:id=>'password').set(password)
       $LOG.info "Setting Password... : *********** " 
       pdf.text "#{Time.now} : Setting Password... : *********** "
       browser.button(:id => 'sign_in').click
       end 
+      
     #Validating CHW Account page
       TerminalNotifier.notify "Validating MyVanilla CHW - Account Module"
 
@@ -147,7 +151,6 @@ browsers.each do |browser_new|
       end  
 
     #Checking Balance
-    #$LOG.info "Entering Into 'CHW Account Balance - Check' Module "
     browser.table(:id, "card_info").flash
     strAccBal = browser.element(:xpath => "//*[@id='summary']").text
     if strAccBal.include? "$30.00"
@@ -161,7 +164,7 @@ browsers.each do |browser_new|
       TerminalNotifier.notify "Balance Check - Failed"
     end
 
-
+    #Check Card Status
       strCardStatus = browser.element(:xpath => "/html/body/div[2]/div/section/dl/dd[3]").text
       if strCardStatus.include? "active"
         $LOG.info "CHW Card Status - Check' successful -  Card Status - Active"
@@ -172,7 +175,39 @@ browsers.each do |browser_new|
         pdf.text "#{Time.now} : CHW Card Status - Check' Failed -  Card Status - Inactive/Unknown"
         TerminalNotifier.notify "Card Status - Failed"
       end
-
+      
+    #Check Exp Date  
+      strExpDate = browser.element(:xpath => "/html/body/div[2]/div/section/dl/dd[2]").text
+      if strExpDate.include? "06/15"
+        $LOG.info "CHW Exp Date - #{strExpDate} - Check' successful"
+        pdf.text "#{Time.now} : CHW Exp Date - #{strExpDate} - Check successful-  Card Status - Active"
+        TerminalNotifier.notify "CHW Exp Date - #{strExpDate} - Check successful" 
+      else
+        $LOG.info "CHW Exp Date  Check' failed"
+        pdf.text "#{Time.now} : CHW Exp Date - Check failed"
+        TerminalNotifier.notify "CHW Exp Date - Check failed" 
+      end
+      
+    #Transactions
+      browser.element(:xpath => "/html/body/div[2]/div/aside/nav/ul/li[2]/a").click   #Statements Link
+      sleep 5
+      $LOG.info "Statements Page loaded"
+      pdf.text "#{Time.now} : Statements Page loaded"
+      TerminalNotifier.notify "Statements Page loaded"
+      if browser.element(:xpath => "/html/body/div[2]/div/section/fieldset/table/tbody/tr/td[2]/div").exist?
+        strTransInfo = browser.element(:xpath => "/html/body/div[2]/div/section/fieldset/table/tbody/tr/td[2]/div").text
+        if strTransInfo.include? "CVS Pharmacy"
+          $LOG.info "Trans Details - #{strTransInfo} - Check successful"
+          pdf.text "#{Time.now} : Trans Details - #{strTransInfo} - Check successful"
+          TerminalNotifier.notify "Trans Details - #{strTransInfo} - Check successful" 
+        else
+          $LOG.info "Trans Details  Check' failed"
+          pdf.text "#{Time.now} : Trans Details - Check failed"
+          TerminalNotifier.notify "Trans Details - Check failed"
+        end
+      end  
+      
+    #Check Profile page
       if browser.element(:xpath => "/html/body/header/div/nav[2]/ul/li/ul/li[3]/a").exists?
         browser.element(:xpath => "/html/body/header/div/nav[2]/ul/li/ul/li[3]/a").click
         sleep 5
@@ -184,15 +219,19 @@ browsers.each do |browser_new|
         pdf.text "#{Time.now} : Card Holder Information Page Error"
         TerminalNotifier.notify "Card Holder Information Page - Error"
       end
-    
+      
+    #First Name Last Name Check
         strFirstName = browser.element(:xpath => "/html/body/div[2]/div/section/form/fieldset/ul/li/div").text
         strLastName = browser.element(:xpath => "/html/body/div[2]/div/section/form/fieldset/ul/li/div[2]").text
   
         if strFirstName.include? "Raghuram" 
           if strLastName.include? "Pulijala"
-          $LOG.info "#{strFirstName} #{strLastName} - Check successful"
-          pdf.text "#{Time.now} :  #{strFirstName} #{strLastName} - Check successful"
-          TerminalNotifier.notify "#{strFirstName} #{strLastName} - Card Holder Info - Name Check"
+          $LOG.info "#{strLastName} - Check successful"
+          pdf.text "#{Time.now} : #{strLastName} - Check successful"
+          TerminalNotifier.notify "#{strLastName} - Card Holder Info - Name Check"
+          $LOG.info "#{strFirstName} - Check successful"
+          pdf.text "#{Time.now} :  #{strFirstName}- Check successful"
+          TerminalNotifier.notify "#{strFirstName} - Card Holder Info - Name Check"
           end
         else
           $LOG.info "Name - Check Failed"
@@ -200,7 +239,7 @@ browsers.each do |browser_new|
           TerminalNotifier.notify "Card Holder Info - Name Check failed"
         end  
    
- 
+   #Email Check
      strEmail = browser.element(:xpath => "//*[@id='emailAddress']").value
       if strEmail.include? "raghuram.pulijala@hotmail.com"
         $LOG.info "Email - #{strEmail} - Check successful"
@@ -212,6 +251,17 @@ browsers.each do |browser_new|
         TerminalNotifier.notify "Email - Check failed"
       end
   
+    #Mobile Phone Num Check
+        strMobNum = browser.element(:xpath => "//*[@id='secondaryPhoneNumber']").value
+         if strEmail.include? "raghuram.pulijala@hotmail.com"
+           $LOG.info "Mob Num - #{strMobNum} - Check successful"
+           pdf.text "#{Time.now} : Mob Num - #{strMobNum} - Check successful"
+           TerminalNotifier.notify "Mob Num - #{strMobNum} - Check successful"
+         else
+           $LOG.info "Mob Num - #{strMobNum} - Check Failed"
+           pdf.text "#{Time.now} : Mob Num - #{strMobNum} - Check Failed"
+           TerminalNotifier.notify "Mob Num - #{strMobNum} - Check failed"
+         end
     sleep 5
 
     #Signing Out of CHW
@@ -264,730 +314,9 @@ $LOG.info "Sending Results in an email"
 
 pdf.render_file "CHW_Automation.pdf"
 
-to_addresses = [
-  'rpulijala@incomm.com'
-]
-cc_addresses = [
-'raghuram.pulijala@gmail.com'
-]
+#Send Formatted HTML Mail along with Log/Report
 
-Pony.mail(
-  :to => to_addresses,
-  :cc => cc_addresses,
-  :from => 'raghuram.pulijala@gmail.com', 
-  :subject => 'MyVanilla CHW Automation Results - PDF Report',
-  :html_body => '
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
-
-
-<div bgcolor="#DEDEDE" lang="EN-US" link="blue" vlink="purple">
-
-
-
-<div>
-
-
-
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-
- <tr>
-
-  <td style="padding:0in 0in 0in 0in">
-
-  <div align="center">
-
-  <table border="0" cellspacing="0" cellpadding="0" width="640">
-
-   <tr style="height:15.0pt">
-
-    <td width="640" style="width:480.0pt;padding:0in 0in 0in 0in;height:15.0pt"></td>
-
-   </tr>
-
-   <tr>
-
-    <td width="640" style="width:480.0pt;padding:0in 0in 0in 0in">
-
-    <table border="0" cellspacing="0" cellpadding="0" width="640" style="width:480.0pt;background:#c7c7c7;border-collapse:collapse">
-
-     <tr>
-
-      <td width="15" style="width:11.25pt;padding:0in 0in 0in 0in"></td>
-
-      <td width="350" style="width:262.5pt;padding:0in 0in 0in 0in">
-
-      <table border="0" cellspacing="0" cellpadding="0" width="350">
-
-       <tr style="height:6.0pt">
-
-        <td width="350" style="width:262.5pt;padding:0in 0in 0in 0in;height:6.0pt"></td>
-
-       </tr>
-
-      </table>
-
-      <div>
-
-      <p><span style="font-size:9.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#ededed"> </span></p>
-
-      </div>
-
-      <table border="0" cellspacing="0" cellpadding="0" width="350">
-
-       <tr style="height:6.0pt">
-
-        <td width="350" style="width:262.5pt;padding:0in 0in 0in 0in;height:6.0pt"></td>
-
-       </tr>
-
-      </table>
-
-      </td>
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in"></td>
-
-      <td width="255" style="width:191.25pt;padding:0in 0in 0in 0in">
-
-      <div align="right">
-
-      <table border="0" cellspacing="0" cellpadding="0" width="255">
-
-       <tr style="height:6.0pt">
-
-        <td width="255" style="width:191.25pt;padding:0in 0in 0in 0in;height:6.0pt"></td>
-
-       </tr>
-
-      </table>
-
-      </div>
-
-      <p align="right" style="text-align:right"><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#ededed"> </span></p>
-
-      <div align="right">
-
-      <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-
-       <tr>
-
-        <td style="padding:0in 0in 0in 0in"></td>
-
-       </tr>
-
-      </table>
-
-      </div>
-
-      <p align="right" style="text-align:right"><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#ededed"> </span></p>
-
-      <div align="right">
-
-      <table border="0" cellspacing="0" cellpadding="0" width="255">
-
-       <tr style="height:6.0pt">
-
-        <td width="255" style="width:191.25pt;padding:0in 0in 0in 0in;height:6.0pt"></td>
-
-       </tr>
-
-      </table>
-
-      </div>
-
-      </td>
-
-      <td width="15" style="width:11.25pt;padding:0in 0in 0in 0in"></td>
-
-     </tr>
-
-    </table>
-
-    </td>
-
-   </tr>
-
-   <tr>
-
-    <td width="640" style="width:480.0pt;background:white;padding:0in 0in 0in 0in">
-
-    <div align="center">
-
-    <table border="0" cellspacing="0" cellpadding="0" width="640" style="width:480.0pt;border-collapse:collapse">
-
-     <tr style="height:22.5pt">
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in;height:22.5pt"></td>
-
-      <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in;height:22.5pt"></td>
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in;height:22.5pt"></td>
-
-     </tr>
-
-     <tr>
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in"></td>
-
-      <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in">
-
-      <p align="center" style="margin-bottom:22.5pt;text-align:center"><strong><span style="font-size:27.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#444444">Ruby - MyVanilla CHW
-
-      Automation Demo</span></strong><span style="font-size:27.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#444444"> </span></p>
-
-      </td>
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in"></td>
-
-     </tr>
-
-    </table>
-
-    </div>
-
-    </td>
-
-   </tr>
-
-   <tr style="height:22.5pt">
-
-    <td width="640" style="width:480.0pt;background:white;padding:0in 0in 0in 0in;height:22.5pt"></td>
-
-   </tr>
-
-   <tr>
-
-    <td width="640" style="width:480.0pt;background:white;padding:0in 0in 0in 0in">
-
-    <table border="0" cellspacing="0" cellpadding="0" width="640" style="width:480.0pt;border-collapse:collapse">
-
-     <tr>
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in"></td>
-
-      <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in">
-
-      <table border="0" cellspacing="0" cellpadding="0" width="580">
-
-       <tr>
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in">
-
-        <p>This is an automatic
-
-        generated email, attached is the Ruby CHW Automation Script results and
-
-        logs</p>
-
-        <p><span style="color:windowtext">Below is the Ruby
-
-        Automation – Logic flow</span></p>
-
-        <p><span><img width="576" height="675" src="https://raw.github.com/rpulijala/RubyDemo/master/RubyDemoLogicFlow.jpg"></span></p>
-
-        </td>
-
-       </tr>
-
-       
-
-       <tr style="height:7.5pt">
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in;height:7.5pt"></td>
-
-       </tr>
-
-      </table>
-
-      <p><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-      
-
-      <table border="0" cellspacing="0" cellpadding="0" width="580">
-
-       <tr>
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in">
-
-        <p> </p>
-
-        </td>
-
-       </tr>
-
-       <tr>
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in">
-
-        <p><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-        </td>
-
-       </tr>
-
-       <tr style="height:11.25pt">
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in;height:11.25pt">
-
-        <p><span style="font-size:11.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-        </td>
-
-       </tr>
-
-       <tr>
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in">
-
-        <div style="margin-bottom:13.5pt">
-
-        <p style="line-height:13.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#444444"> </span></p>
-
-        </div>
-
-        </td>
-
-       </tr>
-
-       <tr style="height:7.5pt">
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-        <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-        </td>
-
-       </tr>
-
-      </table>
-
-      <p><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-      
-
-      <table border="0" cellspacing="0" cellpadding="0" width="580">
-
-       <tr>
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in">
-
-        <div style="margin-bottom:13.5pt">
-
-        <p style="line-height:13.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#444444"> </span></p>
-
-        </div>
-
-        </td>
-
-       </tr>
-
-       <tr style="height:7.5pt">
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-        <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-        </td>
-
-       </tr>
-
-      </table>
-
-      <p><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-      
-
-      <table border="0" cellspacing="0" cellpadding="0" width="580">
-
-       <tr>
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in">
-
-        <div style="margin-bottom:13.5pt">
-
-        <p style="line-height:13.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#444444"> </span></p>
-
-        </div>
-
-        </td>
-
-       </tr>
-
-       <tr style="height:7.5pt">
-
-        <td width="580" style="width:435.0pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-        <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-        </td>
-
-       </tr>
-
-      </table>
-
-      <p><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-      
-
-      <table border="0" cellspacing="0" cellpadding="0" width="580">
-
-       <tr>
-
-        <td width="275" valign="top" style="width:206.25pt;padding:0in 0in 0in 0in">
-
-        <table border="0" cellspacing="0" cellpadding="0" width="275" style="width:206.25pt;border-collapse:collapse">
-
-         <tr>
-
-          <td width="275" style="width:206.25pt;padding:0in 0in 0in 0in">
-
-          <div style="margin-bottom:13.5pt">
-
-          <p style="line-height:13.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#444444"> </span></p>
-
-          </div>
-
-          </td>
-
-         </tr>
-
-         <tr style="height:7.5pt">
-
-          <td width="275" style="width:206.25pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-          <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-        </table>
-
-        </td>
-
-        <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in"></td>
-
-        <td width="275" valign="top" style="width:206.25pt;padding:0in 0in 0in 0in">
-
-        <table border="0" cellspacing="0" cellpadding="0" width="275" style="width:206.25pt;border-collapse:collapse">
-
-         <tr>
-
-          <td width="275" style="width:206.25pt;padding:0in 0in 0in 0in">
-
-          <div style="margin-bottom:13.5pt">
-
-          <p style="line-height:13.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#444444"> </span></p>
-
-          </div>
-
-          </td>
-
-         </tr>
-
-         <tr style="height:7.5pt">
-
-          <td width="275" style="width:206.25pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-          <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-        </table>
-
-        </td>
-
-       </tr>
-
-      </table>
-
-      <p><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-      
-
-      <table border="0" cellspacing="0" cellpadding="0" width="580">
-
-       <tr>
-
-        <td width="180" valign="top" style="width:135.0pt;padding:0in 0in 0in 0in">
-
-        <table border="0" cellspacing="0" cellpadding="0" width="180" style="width:135.0pt;border-collapse:collapse">
-
-         <tr>
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in">
-
-          <p><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-         <tr style="height:7.5pt">
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-          <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-         <tr>
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in">
-
-          <div style="margin-bottom:13.5pt">
-
-          <p style="line-height:13.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#444444"> </span></p>
-
-          </div>
-
-          </td>
-
-         </tr>
-
-         <tr style="height:7.5pt">
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-          <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-        </table>
-
-        </td>
-
-        <td width="20" style="width:15.0pt;padding:0in 0in 0in 0in"></td>
-
-        <td width="180" valign="top" style="width:135.0pt;padding:0in 0in 0in 0in">
-
-        <table border="0" cellspacing="0" cellpadding="0" width="180" style="width:135.0pt;border-collapse:collapse">
-
-         <tr>
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in">
-
-          <p><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-         <tr style="height:7.5pt">
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-          <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-         <tr>
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in">
-
-          <div style="margin-bottom:13.5pt">
-
-          <p style="line-height:13.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#444444"> </span></p>
-
-          </div>
-
-          </td>
-
-         </tr>
-
-         <tr style="height:7.5pt">
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-          <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-        </table>
-
-        </td>
-
-        <td width="20" style="width:15.0pt;padding:0in 0in 0in 0in"></td>
-
-        <td width="180" valign="top" style="width:135.0pt;padding:0in 0in 0in 0in">
-
-        <table border="0" cellspacing="0" cellpadding="0" width="180" style="width:135.0pt;border-collapse:collapse">
-
-         <tr>
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in">
-
-          <p><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-         <tr style="height:7.5pt">
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-          <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-         <tr>
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in">
-
-          <div style="margin-bottom:13.5pt">
-
-          <p style="line-height:13.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#444444"> </span></p>
-
-          </div>
-
-          </td>
-
-         </tr>
-
-         <tr style="height:7.5pt">
-
-          <td width="180" style="width:135.0pt;padding:0in 0in 0in 0in;height:7.5pt">
-
-          <p><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-          </td>
-
-         </tr>
-
-        </table>
-
-        </td>
-
-       </tr>
-
-      </table>
-
-      </td>
-
-      
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in"></td>
-
-     </tr>
-
-    </table>
-
-    </td>
-
-   </tr>
-
-   <tr style="height:11.25pt">
-
-    <td width="640" style="width:480.0pt;background:white;padding:0in 0in 0in 0in;height:11.25pt"></td>
-
-   </tr>
-
-   <tr>
-
-    <td width="640" style="width:480.0pt;padding:0in 0in 0in 0in">
-
-    <table border="0" cellspacing="0" cellpadding="0" width="640" style="width:480.0pt;background:#c7c7c7;border-collapse:collapse">
-
-     <tr style="height:22.5pt">
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in;height:22.5pt"></td>
-
-      <td width="360" style="width:3.75in;padding:0in 0in 0in 0in;height:22.5pt"></td>
-
-      <td width="60" style="width:45.0pt;padding:0in 0in 0in 0in;height:22.5pt"></td>
-
-      <td width="160" style="width:120.0pt;padding:0in 0in 0in 0in;height:22.5pt"></td>
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in;height:22.5pt"></td>
-
-     </tr>
-
-     <tr>
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in"></td>
-
-      <td width="360" valign="top" style="width:3.75in;padding:0in 0in 0in 0in">
-
-      <p><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
-
-      </td>
-
-      <td width="60" style="width:45.0pt;padding:0in 0in 0in 0in"></td>
-
-      <td width="160" valign="top" style="width:120.0pt;padding:0in 0in 0in 0in"></td>
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in"></td>
-
-     </tr>
-
-     <tr style="height:11.25pt">
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in;height:11.25pt"></td>
-
-      <td width="360" style="width:3.75in;padding:0in 0in 0in 0in;height:11.25pt"></td>
-
-      <td width="60" style="width:45.0pt;padding:0in 0in 0in 0in;height:11.25pt"></td>
-
-      <td width="160" style="width:120.0pt;padding:0in 0in 0in 0in;height:11.25pt"></td>
-
-      <td width="30" style="width:22.5pt;padding:0in 0in 0in 0in;height:11.25pt"></td>
-
-     </tr>
-
-    </table>
-
-    </td>
-
-   </tr>
-
-   <tr style="height:45.0pt">
-
-    <td width="640" style="width:480.0pt;padding:0in 0in 0in 0in;height:45.0pt"></td>
-
-   </tr>
-
-  </table>
-
-  </div>
-
-  </td>
-
- </tr>
-
-</table>
-
-
-
-<p><span> </span></p>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-</body></html>', 
-  :attachments => {"CHW_Automation.pdf" => File.read("/Users/Sneha/RubyProjects/RubyAutomation/CHW_Automation.pdf")}
-)
-
+send_mail
 
 #Open Log file
 file_to_open = "CHW_Automation.log"
