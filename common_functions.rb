@@ -744,7 +744,7 @@ module CHWCommonFunctions
 
 
     </body></html>', 
-      :attachments => {"CHW_Automation.pdf" => File.read("/Users/Sneha/RubyProjects/RubyAutomation/CHW_Automation.pdf"),"Ruby-CHW-Automation-LogicFlow.pdf" => => File.read("/Users/Sneha/RubyProjects/RubyAutomation/Ruby-CHW-Automation-LogicFlow.pdf")}
+      :attachments => {"CHW_Automation.pdf" => File.read("/Users/Sneha/RubyProjects/RubyAutomation/CHW_Automation.pdf"),"Ruby-CHW-Automation-LogicFlow.pdf" => File.read("/Users/Sneha/RubyProjects/RubyAutomation/Ruby-CHW-Automation-LogicFlow.pdf")}
     )
 
     
