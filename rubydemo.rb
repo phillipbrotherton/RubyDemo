@@ -48,7 +48,7 @@ include CHWCommonFunctions
   pdf.text "Logger Details of Ruby Automation Script", :style => :bold_italic
   pdf.stroke_horizontal_rule
   pdf.move_down 10
-  pdf.text "Source Code in GitHub at - ", :style => :bold_italic
+  pdf.text "Source Code in GitHub at - https://github.com/rpulijala/RubyDemo", :style => :italic
   pdf.move_down 10
   pdf.text "Ruby - MyVanilla CHW Automation script execution started", :style => :bold_italic
   pdf.move_down 10
