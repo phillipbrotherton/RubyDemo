@@ -48,7 +48,7 @@ include CHWCommonFunctions
   pdf.text "Logger Details of Ruby Automation Script", :style => :bold_italic
   pdf.stroke_horizontal_rule
   pdf.move_down 10
-  pdf.text "Source Code in GitHub at - https://github.com/rpulijala/RubyDemo", :style => :italic, :color => "0000FF"
+  pdf.text "Source Code in GitHub at - <b><u><color rgb='2554C7'>https://github.com/rpulijala/RubyDemo</color></u></b>", :style => :italic, :inline_format => true
   pdf.move_down 10
   pdf.text "Ruby - MyVanilla CHW Automation script execution started", :style => :bold_italic
   pdf.move_down 10
@@ -102,7 +102,7 @@ browsers.each do |browser_new|
     pdf.text "#{Time.now} : Entering into - 'Check if CHW is loaded' .. "
     if browser.div(:id, "signup_form").exists?
       $LOG.info "MyVanilla CHW is loaded.." 
-      pdf.text "#{Time.now} : MyVanilla CHW is loaded - Check - <color rgb='347235'>Success</color>",:inline_format => true
+      pdf.text "#{Time.now} : MyVanilla CHW is loaded - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
     else
       $LOG.error "Error accessing MyVanilla CHW" 
       pdf.text "#{Time.now} : Error accessing MyVanilla CHW"
@@ -143,7 +143,7 @@ browsers.each do |browser_new|
     browser.wait_until {browser.div(:id, "summary").exists? }
     if browser.div(:id, "summary").exists?
       $LOG.info "MyVanilla CHW - Login successful" 
-      pdf.text "#{Time.now} : MyVanilla CHW - Login - <color rgb='347235'>Success</color>",:inline_format => true
+      pdf.text "#{Time.now} : MyVanilla CHW - Login - <color rgb='347235'><b>Success</b></color>",:inline_format => true
       TerminalNotifier.notify "MyVanilla CHW - Login successful"
     else
       $LOG.error "MyVanila CHW - Login failed - Please Check" 
@@ -156,7 +156,7 @@ browsers.each do |browser_new|
     strAccBal = browser.element(:xpath => "//*[@id='summary']").text
     if strAccBal.include? "$30.00"
      $LOG.info "CHW Account Balance - Check - #{strAccBal} - Success"
-     pdf.text "#{Time.now} : CHW Account Balance - Check  - #{strAccBal} - <color rgb='347235'>Success</color>",:inline_format => true
+     pdf.text "#{Time.now} : CHW Account Balance - Check  - #{strAccBal} - <color rgb='347235'><b>Success</b></color>",:inline_format => true
 
      TerminalNotifier.notify "Balance Check - Success" 
     else
@@ -169,7 +169,7 @@ browsers.each do |browser_new|
     strCardStatus = browser.element(:xpath => "/html/body/div[2]/div/section/dl/dd[3]").text
     if strCardStatus.include? "active"
       $LOG.info "CHW Card Status - Check' successful -  Card Status - Active"
-      pdf.text "#{Time.now} : CHW Card Status - Check- Active - <color rgb='347235'>Success</color>",:inline_format => true
+      pdf.text "#{Time.now} : CHW Card Status - Check- Active - <color rgb='347235'><b>Success</b></color>",:inline_format => true
       TerminalNotifier.notify "Card Status - Active" 
     else
       $LOG.error "CHW Card Status - Check' Failed -  Card Status - Inactive/Unknown"
@@ -181,7 +181,7 @@ browsers.each do |browser_new|
     strExpDate = browser.element(:xpath => "/html/body/div[2]/div/section/dl/dd[2]").text
     if strExpDate.include? "06/15"
       $LOG.info "CHW Exp Date - #{strExpDate} - Check' successful"
-      pdf.text "#{Time.now} : CHW Exp Date - #{strExpDate} - Check - <color rgb='347235'>Success</color>",:inline_format => true
+      pdf.text "#{Time.now} : CHW Exp Date - #{strExpDate} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
       TerminalNotifier.notify "CHW Exp Date - #{strExpDate} - Check successful" 
     else
       $LOG.info "CHW Exp Date  Check' failed"
@@ -199,7 +199,7 @@ browsers.each do |browser_new|
       strTransInfo = browser.element(:xpath => "/html/body/div[2]/div/section/fieldset/table/tbody/tr/td[2]/div").text
       if strTransInfo.include? "CVS Pharmacy"
         $LOG.info "Trans Details - #{strTransInfo} - Check successful"
-        pdf.text "#{Time.now} : Trans Details - #{strTransInfo} - Check - <color rgb='347235'>Success</color>",:inline_format => true
+        pdf.text "#{Time.now} : Trans Details - #{strTransInfo} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
         TerminalNotifier.notify "Trans Details - #{strTransInfo} - Check successful" 
       else
         $LOG.info "Trans Details  Check' failed"
@@ -213,7 +213,7 @@ browsers.each do |browser_new|
       browser.element(:xpath => "/html/body/header/div/nav[2]/ul/li/ul/li[3]/a").click
       sleep 5
       $LOG.info "Card Holder Information Page loaded"
-      pdf.text "#{Time.now} : Card Holder Information Page loaded - <color rgb='347235'>Success</color>",:inline_format => true
+      pdf.text "#{Time.now} : Card Holder Information Page loaded - <color rgb='347235'><b>Success</b></color>",:inline_format => true
       TerminalNotifier.notify "Card Holder Information Page loaded" 
     else
       $LOG.error "Card Holder Information Page - Error"
@@ -228,10 +228,10 @@ browsers.each do |browser_new|
     if strFirstName.include? "Raghuram" 
       if strLastName.include? "Pulijala"
       $LOG.info "#{strLastName} - Check successful"
-      pdf.text "#{Time.now} : #{strLastName} - Check - <color rgb='347235'>Success</color>",:inline_format => true
+      pdf.text "#{Time.now} : #{strLastName} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
       TerminalNotifier.notify "#{strLastName} - Card Holder Info - Name Check"
       $LOG.info "#{strFirstName} - Check successful"
-      pdf.text "#{Time.now} :  #{strFirstName}- Check - <color rgb='347235'>Success</color>",:inline_format => true
+      pdf.text "#{Time.now} :  #{strFirstName}- Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
       TerminalNotifier.notify "#{strFirstName} - Card Holder Info - Name Check"
       end
     else
@@ -244,7 +244,7 @@ browsers.each do |browser_new|
    strEmail = browser.element(:xpath => "//*[@id='emailAddress']").value
     if strEmail.include? "raghuram.pulijala@hotmail.com"
       $LOG.info "Email - #{strEmail} - Check successful"
-      pdf.text "#{Time.now} : Email - #{strEmail} - Check - <color rgb='347235'>Success</color>",:inline_format => true
+      pdf.text "#{Time.now} : Email - #{strEmail} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
       TerminalNotifier.notify "Email - Check successful"
     else
       $LOG.info "Email - #{strEmail} - Check Failed"
@@ -256,7 +256,7 @@ browsers.each do |browser_new|
     strMobNum = browser.element(:xpath => "//*[@id='secondaryPhoneNumber']").value
      if strEmail.include? "raghuram.pulijala@hotmail.com"
        $LOG.info "Mob Num - #{strMobNum} - Check successful"
-       pdf.text "#{Time.now} : Mob Num - #{strMobNum} - Check - <color rgb='347235'>Success</color>",:inline_format => true
+       pdf.text "#{Time.now} : Mob Num - #{strMobNum} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
        TerminalNotifier.notify "Mob Num - #{strMobNum} - Check successful"
      else
        $LOG.info "Mob Num - #{strMobNum} - Check Failed"
@@ -273,7 +273,7 @@ browsers.each do |browser_new|
     browser.wait_until {browser.div(:id, "signup_form").exists? }
     if browser.div(:id, "signup_form").exists?
       $LOG.info "CHW MyVanilla - Sign Out complete"
-      pdf.text "#{Time.now} : CHW MyVanilla - Sign Out complete - <color rgb='347235'>Success</color>",:inline_format => true
+      pdf.text "#{Time.now} : CHW MyVanilla - Sign Out complete - <color rgb='347235'><b>Success</b></color>",:inline_format => true
     else
       $LOG.error "CHW MyVanilla - Sign Out error"
       pdf.text "#{Time.now} : CHW MyVanilla - Sign Out error"
@@ -290,7 +290,7 @@ browsers.each do |browser_new|
   #finalizing comments
     $LOG.info "CHW Automation for Card Check Complete"
     $LOG.info "********************  MyVanilla CHW - #{browser_new} - End Execution **************************"
-    pdf.text "#{Time.now} : CHW Automation for Card Check Complete - <color rgb='347235'>Success</color>",:inline_format => true
+    pdf.text "#{Time.now} : CHW Automation for Card Check Complete - <color rgb='347235'><b>Success</b></color>",:inline_format => true
     pdf.text "#{Time.now} : MyVanilla CHW - #{browser_new} - End Execution"
     TerminalNotifier.notify "MyVanilla CHW - #{browser_new} - End Execution"
     pdf.move_down 10
@@ -307,7 +307,7 @@ browsers.each do |browser_new|
 end
   
 #Save PDF 
-  pdf.render_file "CHW_Automation.pdf"
+  pdf.render_file "Ruby_Automation_Results.pdf"
   $LOG.info "Saving PDF Results"
 
 #Send Formatted HTML Mail along with Log/Report - Function in CommonFunctions

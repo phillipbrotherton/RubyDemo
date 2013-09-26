@@ -18,8 +18,8 @@ module CHWCommonFunctions
     if File.exists?("/Users/Sneha/RubyProjects/RubyAutomation/CHW_Automation.log")
       File.delete("CHW_Automation.log")
     end
-    if File.exists?("/Users/Sneha/RubyProjects/RubyAutomation/CHW_Automation.pdf")
-      File.delete("CHW_Automation.pdf")
+    if File.exists?("/Users/Sneha/RubyProjects/RubyAutomation/Ruby_Automation_Results")
+      File.delete("Ruby_Automation_Results")
     end
   end
   def send_mail
@@ -744,7 +744,7 @@ module CHWCommonFunctions
 
 
     </body></html>', 
-      :attachments => {"CHW_Automation.pdf" => File.read("/Users/Sneha/RubyProjects/RubyAutomation/CHW_Automation.pdf"),"Ruby-CHW-Automation-LogicFlow.pdf" => File.read("/Users/Sneha/RubyProjects/RubyAutomation/Ruby-CHW-Automation-LogicFlow.pdf")}
+      :attachments => {"Ruby_Automation_Results.pdf" => File.read("/Users/Sneha/RubyProjects/RubyAutomation/Ruby_Automation_Results.pdf"),"Ruby_Automation_LogicFlow.pdf" => File.read("/Users/Sneha/RubyProjects/RubyAutomation/Ruby_Automation_LogicFlow.pdf")}
     )
 
     
