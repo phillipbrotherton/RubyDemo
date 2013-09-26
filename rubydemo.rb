@@ -16,43 +16,40 @@ require 'time'
 include CHWCommonFunctions
 
 #Create an array of Browsers
-browsers = ["chrome","ff","safari"]
+  browsers = ["chrome","ff","safari"]
 
 #MyVanilla URL
-url = "https://www.myvanilladebitcard.com"
+  url = "https://www.myvanilladebitcard.com"
 
 #Function to delete log files
-delete_log_files 
+  delete_log_files 
 
 #Using Log File
-$LOG = Logger.new('CHW_Automation.log') 
+  $LOG = Logger.new('CHW_Automation.log') 
 
 #Using PDF
-pdf = Prawn::Document.new
-
-
+  pdf = Prawn::Document.new
 
 #Write to PDF
+  pdf.font "Helvetica"
+  pdf.define_grid(:columns => 5, :rows => 15, :gutter => 10) 
+  pdf.grid([0,0], [1,1]).bounding_box do 
+    pdf.text "MyVanilla CHW Automation - Results", :size => 18
+    pdf.move_down 10
+    pdf.text "Date: #{Date.today.to_s}", :align => :left  
+  end
+  pdf.grid([0,3.6], [1,4]).bounding_box do 
+    # Assign the path to your file name first to a local variable.
+    logo_path = File.expand_path('/Users/Sneha/RubyProjects/RubyAutomation/myvanilla.png', __FILE__)
 
-    pdf.font "Helvetica"
-    pdf.define_grid(:columns => 5, :rows => 15, :gutter => 10) 
-    pdf.grid([0,0], [1,1]).bounding_box do 
-      pdf.text "MyVanilla CHW Automation - Results", :size => 18
-      pdf.move_down 10
-      pdf.text "Date: #{Date.today.to_s}", :align => :left  
-    end
-    pdf.grid([0,3.6], [1,4]).bounding_box do 
-      # Assign the path to your file name first to a local variable.
-      logo_path = File.expand_path('/Users/Sneha/RubyProjects/RubyAutomation/myvanilla.png', __FILE__)
- 
-      # Displays the image in your PDF. Dimensions are optional.
-      pdf.image logo_path, :width => 150, :height => 45, :position => :left
-    end
-    pdf.text "Logger Details of Ruby Automation Script", :style => :bold_italic
-    pdf.stroke_horizontal_rule
-    pdf.move_down 10
-    pdf.text "Ruby - MyVanilla CHW Automation script execution started", :style => :bold_italic
-    pdf.move_down 10
+    # Displays the image in your PDF. Dimensions are optional.
+    pdf.image logo_path, :width => 150, :height => 45, :position => :left
+  end
+  pdf.text "Logger Details of Ruby Automation Script", :style => :bold_italic
+  pdf.stroke_horizontal_rule
+  pdf.move_down 10
+  pdf.text "Ruby - MyVanilla CHW Automation script execution started", :style => :bold_italic
+  pdf.move_down 10
 
 browsers.each do |browser_new| 
   $LOG.info "********************  MyVanilla CHW - #{browser_new} - Start Execution **************************" 
@@ -306,18 +303,16 @@ browsers.each do |browser_new|
     end  
       
 end
-
-#Send Email
-  TerminalNotifier.notify "Sending Results in an email"
-  $LOG.info "Sending Results in an email"
-
-
+  
 #Save PDF 
   pdf.render_file "CHW_Automation.pdf"
+  $LOG.info "Saving PDF Results"
 
 #Send Formatted HTML Mail along with Log/Report - Function in CommonFunctions
   send_mail
-
+  TerminalNotifier.notify "Sending Results in an email"
+  $LOG.info "Sending Results in an email"
+  
 #Open Log file
   file_to_open = "CHW_Automation.log"
   system %{open "#{file_to_open}"}
