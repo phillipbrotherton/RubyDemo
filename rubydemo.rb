@@ -264,6 +264,19 @@ browsers.each do |browser_new|
        pdf.text "#{Time.now} : Mob Num - #{strMobNum} - Check Failed"
        TerminalNotifier.notify "Mob Num - #{strMobNum} - Check failed"
      end
+     
+  #City Check
+  
+  strCity = browser.element(:xpath => "//*[@id='street_city']").value
+   if strCity.include? "Alpharetta"
+     $LOG.info "City - #{strCity} - Check successful"
+     pdf.text "#{Time.now} : City - #{strCity} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
+     TerminalNotifier.notify "City - #{strCity} - Check successful"
+   else
+     $LOG.info "City - #{strCity} - Check Failed"
+     pdf.text "#{Time.now} : City - #{strCity} - Check Failed"
+     TerminalNotifier.notify "City - #{strCity} - Check failed"
+   end
     sleep 5
 
   #Signing Out of CHW

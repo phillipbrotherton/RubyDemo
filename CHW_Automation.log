@@ -1,90 +1,93 @@
-# Logfile created on 2013-09-26 11:43:07 -0400 by logger.rb/36483
-I, [2013-09-26T11:43:08.140516 #9182]  INFO -- : ********************  MyVanilla CHW - chrome - Start Execution **************************
-I, [2013-09-26T11:43:08.325096 #9182]  INFO -- : Entering into - 'Create Excel object' .. 
-I, [2013-09-26T11:43:10.839581 #9182]  INFO -- : Opening new chrome Browser instance......
-I, [2013-09-26T11:43:21.232637 #9182]  INFO -- : Go to - https://www.myvanilladebitcard.com
-I, [2013-09-26T11:43:21.391898 #9182]  INFO -- : Entering into - 'Check if CHW is loaded' .. 
-I, [2013-09-26T11:43:21.404101 #9182]  INFO -- : MyVanilla CHW is loaded..
-I, [2013-09-26T11:43:21.406441 #9182]  INFO -- : Entering into - 'Login Module' .. 
-I, [2013-09-26T11:43:21.407394 #9182]  INFO -- : Entering into - 'Get Test Data' .. 
-I, [2013-09-26T11:43:21.413490 #9182]  INFO -- : Fetching UserID and Password..
-I, [2013-09-26T11:43:21.919450 #9182]  INFO -- : Setting User Name... :  rpulijala
-I, [2013-09-26T11:43:22.077512 #9182]  INFO -- : Setting Password... : *********** 
-I, [2013-09-26T11:43:28.448972 #9182]  INFO -- : Entering into - 'CHW Account Module' ..
-I, [2013-09-26T11:43:28.479202 #9182]  INFO -- : MyVanilla CHW - Login successful
-I, [2013-09-26T11:43:28.729970 #9182]  INFO -- : CHW Account Balance - Check - Available Balance $30.00 - Success
-I, [2013-09-26T11:43:28.934912 #9182]  INFO -- : CHW Card Status - Check' successful -  Card Status - Active
-I, [2013-09-26T11:43:29.121239 #9182]  INFO -- : CHW Exp Date - 06/15 - Check' successful
-I, [2013-09-26T11:43:37.442678 #9182]  INFO -- : Statements Page loaded
-I, [2013-09-26T11:43:37.642164 #9182]  INFO -- : Trans Details - CVS Pharmacy, , - Check successful
-I, [2013-09-26T11:43:44.796460 #9182]  INFO -- : Card Holder Information Page loaded
-I, [2013-09-26T11:43:45.062553 #9182]  INFO -- : LAST NAME
+# Logfile created on 2013-09-26 18:07:54 -0400 by logger.rb/36483
+I, [2013-09-26T18:07:54.293424 #10898]  INFO -- : ********************  MyVanilla CHW - chrome - Start Execution **************************
+I, [2013-09-26T18:07:54.656554 #10898]  INFO -- : Entering into - 'Create Excel object' .. 
+I, [2013-09-26T18:07:57.168023 #10898]  INFO -- : Opening new chrome Browser instance......
+I, [2013-09-26T18:08:08.988540 #10898]  INFO -- : Go to - https://www.myvanilladebitcard.com
+I, [2013-09-26T18:08:09.147234 #10898]  INFO -- : Entering into - 'Check if CHW is loaded' .. 
+I, [2013-09-26T18:08:09.160197 #10898]  INFO -- : MyVanilla CHW is loaded..
+I, [2013-09-26T18:08:09.162341 #10898]  INFO -- : Entering into - 'Login Module' .. 
+I, [2013-09-26T18:08:09.163342 #10898]  INFO -- : Entering into - 'Get Test Data' .. 
+I, [2013-09-26T18:08:09.172024 #10898]  INFO -- : Fetching UserID and Password..
+I, [2013-09-26T18:08:09.812208 #10898]  INFO -- : Setting User Name... :  rpulijala
+I, [2013-09-26T18:08:09.963225 #10898]  INFO -- : Setting Password... : *********** 
+I, [2013-09-26T18:08:16.594217 #10898]  INFO -- : Entering into - 'CHW Account Module' ..
+I, [2013-09-26T18:08:16.621825 #10898]  INFO -- : MyVanilla CHW - Login successful
+I, [2013-09-26T18:08:16.871144 #10898]  INFO -- : CHW Account Balance - Check - Available Balance $30.00 - Success
+I, [2013-09-26T18:08:17.085271 #10898]  INFO -- : CHW Card Status - Check' successful -  Card Status - Active
+I, [2013-09-26T18:08:17.274420 #10898]  INFO -- : CHW Exp Date - 06/15 - Check' successful
+I, [2013-09-26T18:08:25.129593 #10898]  INFO -- : Statements Page loaded
+I, [2013-09-26T18:08:25.332197 #10898]  INFO -- : Trans Details - CVS Pharmacy, , - Check successful
+I, [2013-09-26T18:08:32.499683 #10898]  INFO -- : Card Holder Information Page loaded
+I, [2013-09-26T18:08:32.727433 #10898]  INFO -- : LAST NAME
 Pulijala - Check successful
-I, [2013-09-26T11:43:45.225729 #9182]  INFO -- : FIRST NAME
+I, [2013-09-26T18:08:32.891529 #10898]  INFO -- : FIRST NAME
 Raghuram - Check successful
-I, [2013-09-26T11:43:45.407297 #9182]  INFO -- : Email - raghuram.pulijala@hotmail.com - Check successful
-I, [2013-09-26T11:43:45.586948 #9182]  INFO -- : Mob Num - 3142233157 - Check successful
-I, [2013-09-26T11:43:53.673453 #9182]  INFO -- : CHW MyVanilla - Sign Out complete
-I, [2013-09-26T11:43:56.829203 #9182]  INFO -- : Entering into - 'Close Browser' Module
-I, [2013-09-26T11:44:02.041208 #9182]  INFO -- : CHW Automation for Card Check Complete
-I, [2013-09-26T11:44:02.041371 #9182]  INFO -- : ********************  MyVanilla CHW - chrome - End Execution **************************
-I, [2013-09-26T11:44:02.200968 #9182]  INFO -- : ********************  MyVanilla CHW - ff - Start Execution **************************
-I, [2013-09-26T11:44:02.364939 #9182]  INFO -- : Entering into - 'Create Excel object' .. 
-I, [2013-09-26T11:44:09.532179 #9182]  INFO -- : Opening new ff Browser instance......
-I, [2013-09-26T11:44:19.961962 #9182]  INFO -- : Go to - https://www.myvanilladebitcard.com
-I, [2013-09-26T11:44:20.119544 #9182]  INFO -- : Entering into - 'Check if CHW is loaded' .. 
-I, [2013-09-26T11:44:20.172385 #9182]  INFO -- : MyVanilla CHW is loaded..
-I, [2013-09-26T11:44:20.174322 #9182]  INFO -- : Entering into - 'Login Module' .. 
-I, [2013-09-26T11:44:20.175108 #9182]  INFO -- : Entering into - 'Get Test Data' .. 
-I, [2013-09-26T11:44:20.180154 #9182]  INFO -- : Fetching UserID and Password..
-I, [2013-09-26T11:44:20.873534 #9182]  INFO -- : Setting User Name... :  rpulijala
-I, [2013-09-26T11:44:21.117292 #9182]  INFO -- : Setting Password... : *********** 
-I, [2013-09-26T11:44:27.386116 #9182]  INFO -- : Entering into - 'CHW Account Module' ..
-I, [2013-09-26T11:44:27.514677 #9182]  INFO -- : MyVanilla CHW - Login successful
-I, [2013-09-26T11:44:28.117896 #9182]  INFO -- : CHW Account Balance - Check - Available Balance $30.00 - Success
-I, [2013-09-26T11:44:28.358830 #9182]  INFO -- : CHW Card Status - Check' successful -  Card Status - Active
-I, [2013-09-26T11:44:28.607281 #9182]  INFO -- : CHW Exp Date - 06/15 - Check' successful
-I, [2013-09-26T11:44:33.984821 #9182]  INFO -- : Statements Page loaded
-I, [2013-09-26T11:44:34.729383 #9182]  INFO -- : Trans Details - CVS Pharmacy, , - Check successful
-I, [2013-09-26T11:44:40.202817 #9182]  INFO -- : Card Holder Information Page loaded
-I, [2013-09-26T11:44:40.670060 #9182]  INFO -- : LAST NAME
+I, [2013-09-26T18:08:33.077920 #10898]  INFO -- : Email - raghuram.pulijala@hotmail.com - Check successful
+I, [2013-09-26T18:08:33.275341 #10898]  INFO -- : Mob Num - 3142233157 - Check successful
+I, [2013-09-26T18:08:33.458242 #10898]  INFO -- : City - Alpharetta - Check successful
+I, [2013-09-26T18:08:42.242451 #10898]  INFO -- : CHW MyVanilla - Sign Out complete
+I, [2013-09-26T18:08:45.397180 #10898]  INFO -- : Entering into - 'Close Browser' Module
+I, [2013-09-26T18:08:50.602643 #10898]  INFO -- : CHW Automation for Card Check Complete
+I, [2013-09-26T18:08:50.602770 #10898]  INFO -- : ********************  MyVanilla CHW - chrome - End Execution **************************
+I, [2013-09-26T18:08:50.775174 #10898]  INFO -- : ********************  MyVanilla CHW - ff - Start Execution **************************
+I, [2013-09-26T18:08:50.953870 #10898]  INFO -- : Entering into - 'Create Excel object' .. 
+I, [2013-09-26T18:08:58.919140 #10898]  INFO -- : Opening new ff Browser instance......
+I, [2013-09-26T18:09:09.692017 #10898]  INFO -- : Go to - https://www.myvanilladebitcard.com
+I, [2013-09-26T18:09:09.845994 #10898]  INFO -- : Entering into - 'Check if CHW is loaded' .. 
+I, [2013-09-26T18:09:09.904454 #10898]  INFO -- : MyVanilla CHW is loaded..
+I, [2013-09-26T18:09:09.906590 #10898]  INFO -- : Entering into - 'Login Module' .. 
+I, [2013-09-26T18:09:09.907552 #10898]  INFO -- : Entering into - 'Get Test Data' .. 
+I, [2013-09-26T18:09:09.913547 #10898]  INFO -- : Fetching UserID and Password..
+I, [2013-09-26T18:09:10.858642 #10898]  INFO -- : Setting User Name... :  rpulijala
+I, [2013-09-26T18:09:11.316278 #10898]  INFO -- : Setting Password... : *********** 
+I, [2013-09-26T18:09:17.882898 #10898]  INFO -- : Entering into - 'CHW Account Module' ..
+I, [2013-09-26T18:09:18.028272 #10898]  INFO -- : MyVanilla CHW - Login successful
+I, [2013-09-26T18:09:18.642727 #10898]  INFO -- : CHW Account Balance - Check - Available Balance $30.00 - Success
+I, [2013-09-26T18:09:18.879642 #10898]  INFO -- : CHW Card Status - Check' successful -  Card Status - Active
+I, [2013-09-26T18:09:19.124336 #10898]  INFO -- : CHW Exp Date - 06/15 - Check' successful
+I, [2013-09-26T18:09:24.482540 #10898]  INFO -- : Statements Page loaded
+I, [2013-09-26T18:09:24.883293 #10898]  INFO -- : Trans Details - CVS Pharmacy, , - Check successful
+I, [2013-09-26T18:09:30.431063 #10898]  INFO -- : Card Holder Information Page loaded
+I, [2013-09-26T18:09:30.869228 #10898]  INFO -- : LAST NAME
 Pulijala - Check successful
-I, [2013-09-26T11:44:40.826833 #9182]  INFO -- : FIRST NAME
+I, [2013-09-26T18:09:31.027237 #10898]  INFO -- : FIRST NAME
 Raghuram - Check successful
-I, [2013-09-26T11:44:41.143198 #9182]  INFO -- : Email - raghuram.pulijala@hotmail.com - Check successful
-I, [2013-09-26T11:44:41.419666 #9182]  INFO -- : Mob Num - 3142233157 - Check successful
-I, [2013-09-26T11:44:52.530949 #9182]  INFO -- : CHW MyVanilla - Sign Out complete
-I, [2013-09-26T11:44:55.690107 #9182]  INFO -- : Entering into - 'Close Browser' Module
-I, [2013-09-26T11:44:57.340212 #9182]  INFO -- : CHW Automation for Card Check Complete
-I, [2013-09-26T11:44:57.340309 #9182]  INFO -- : ********************  MyVanilla CHW - ff - End Execution **************************
-I, [2013-09-26T11:44:57.515407 #9182]  INFO -- : ********************  MyVanilla CHW - safari - Start Execution **************************
-I, [2013-09-26T11:44:57.688064 #9182]  INFO -- : Entering into - 'Create Excel object' .. 
-I, [2013-09-26T11:45:00.130722 #9182]  INFO -- : Opening new safari Browser instance......
-I, [2013-09-26T11:45:11.691827 #9182]  INFO -- : Go to - https://www.myvanilladebitcard.com
-I, [2013-09-26T11:45:11.852076 #9182]  INFO -- : Entering into - 'Check if CHW is loaded' .. 
-I, [2013-09-26T11:45:11.889416 #9182]  INFO -- : MyVanilla CHW is loaded..
-I, [2013-09-26T11:45:11.892249 #9182]  INFO -- : Entering into - 'Login Module' .. 
-I, [2013-09-26T11:45:11.893552 #9182]  INFO -- : Entering into - 'Get Test Data' .. 
-I, [2013-09-26T11:45:11.900331 #9182]  INFO -- : Fetching UserID and Password..
-I, [2013-09-26T11:45:12.401559 #9182]  INFO -- : Setting User Name... :  rpulijala
-I, [2013-09-26T11:45:12.554861 #9182]  INFO -- : Setting Password... : *********** 
-I, [2013-09-26T11:45:12.788849 #9182]  INFO -- : Entering into - 'CHW Account Module' ..
-I, [2013-09-26T11:45:18.583240 #9182]  INFO -- : MyVanilla CHW - Login successful
-I, [2013-09-26T11:45:18.959167 #9182]  INFO -- : CHW Account Balance - Check - Available Balance $30.00 - Success
-I, [2013-09-26T11:45:19.164924 #9182]  INFO -- : CHW Card Status - Check' successful -  Card Status - Active
-I, [2013-09-26T11:45:19.370017 #9182]  INFO -- : CHW Exp Date - 06/15 - Check' successful
-I, [2013-09-26T11:45:24.601506 #9182]  INFO -- : Statements Page loaded
-I, [2013-09-26T11:45:24.845173 #9182]  INFO -- : Trans Details - CVS Pharmacy, , - Check successful
-I, [2013-09-26T11:45:30.126787 #9182]  INFO -- : Card Holder Information Page loaded
-I, [2013-09-26T11:45:30.390658 #9182]  INFO -- : LAST NAME
+I, [2013-09-26T18:09:31.290616 #10898]  INFO -- : Email - raghuram.pulijala@hotmail.com - Check successful
+I, [2013-09-26T18:09:31.612105 #10898]  INFO -- : Mob Num - 3142233157 - Check successful
+I, [2013-09-26T18:09:31.896829 #10898]  INFO -- : City - Alpharetta - Check successful
+I, [2013-09-26T18:09:43.415130 #10898]  INFO -- : CHW MyVanilla - Sign Out complete
+I, [2013-09-26T18:09:46.574684 #10898]  INFO -- : Entering into - 'Close Browser' Module
+I, [2013-09-26T18:09:48.226726 #10898]  INFO -- : CHW Automation for Card Check Complete
+I, [2013-09-26T18:09:48.226811 #10898]  INFO -- : ********************  MyVanilla CHW - ff - End Execution **************************
+I, [2013-09-26T18:09:48.391468 #10898]  INFO -- : ********************  MyVanilla CHW - safari - Start Execution **************************
+I, [2013-09-26T18:09:48.555657 #10898]  INFO -- : Entering into - 'Create Excel object' .. 
+I, [2013-09-26T18:09:51.626762 #10898]  INFO -- : Opening new safari Browser instance......
+I, [2013-09-26T18:10:04.640798 #10898]  INFO -- : Go to - https://www.myvanilladebitcard.com
+I, [2013-09-26T18:10:04.796576 #10898]  INFO -- : Entering into - 'Check if CHW is loaded' .. 
+I, [2013-09-26T18:10:04.863721 #10898]  INFO -- : MyVanilla CHW is loaded..
+I, [2013-09-26T18:10:04.866784 #10898]  INFO -- : Entering into - 'Login Module' .. 
+I, [2013-09-26T18:10:04.867792 #10898]  INFO -- : Entering into - 'Get Test Data' .. 
+I, [2013-09-26T18:10:04.873780 #10898]  INFO -- : Fetching UserID and Password..
+I, [2013-09-26T18:10:05.366394 #10898]  INFO -- : Setting User Name... :  rpulijala
+I, [2013-09-26T18:10:05.526182 #10898]  INFO -- : Setting Password... : *********** 
+I, [2013-09-26T18:10:05.766950 #10898]  INFO -- : Entering into - 'CHW Account Module' ..
+I, [2013-09-26T18:10:11.770180 #10898]  INFO -- : MyVanilla CHW - Login successful
+I, [2013-09-26T18:10:12.150754 #10898]  INFO -- : CHW Account Balance - Check - Available Balance $30.00 - Success
+I, [2013-09-26T18:10:12.354286 #10898]  INFO -- : CHW Card Status - Check' successful -  Card Status - Active
+I, [2013-09-26T18:10:12.557830 #10898]  INFO -- : CHW Exp Date - 06/15 - Check' successful
+I, [2013-09-26T18:10:17.782013 #10898]  INFO -- : Statements Page loaded
+I, [2013-09-26T18:10:18.022723 #10898]  INFO -- : Trans Details - CVS Pharmacy, , - Check successful
+I, [2013-09-26T18:10:23.286318 #10898]  INFO -- : Card Holder Information Page loaded
+I, [2013-09-26T18:10:23.550884 #10898]  INFO -- : LAST NAME
 Pulijala - Check successful
-I, [2013-09-26T11:45:30.548330 #9182]  INFO -- : FIRST NAME
+I, [2013-09-26T18:10:23.709585 #10898]  INFO -- : FIRST NAME
 Raghuram - Check successful
-I, [2013-09-26T11:45:30.755026 #9182]  INFO -- : Email - raghuram.pulijala@hotmail.com - Check successful
-I, [2013-09-26T11:45:30.959941 #9182]  INFO -- : Mob Num - 3142233157 - Check successful
-I, [2013-09-26T11:45:39.127491 #9182]  INFO -- : CHW MyVanilla - Sign Out complete
-I, [2013-09-26T11:45:42.286155 #9182]  INFO -- : Entering into - 'Close Browser' Module
-I, [2013-09-26T11:45:42.405604 #9182]  INFO -- : CHW Automation for Card Check Complete
-I, [2013-09-26T11:45:42.405714 #9182]  INFO -- : ********************  MyVanilla CHW - safari - End Execution **************************
-I, [2013-09-26T11:45:42.602953 #9182]  INFO -- : Saving PDF Results
-I, [2013-09-26T11:45:42.920358 #9182]  INFO -- : Sending Results in an email
+I, [2013-09-26T18:10:23.914579 #10898]  INFO -- : Email - raghuram.pulijala@hotmail.com - Check successful
+I, [2013-09-26T18:10:24.117928 #10898]  INFO -- : Mob Num - 3142233157 - Check successful
+I, [2013-09-26T18:10:24.321809 #10898]  INFO -- : City - Alpharetta - Check successful
+I, [2013-09-26T18:10:33.210794 #10898]  INFO -- : CHW MyVanilla - Sign Out complete
+I, [2013-09-26T18:10:36.369926 #10898]  INFO -- : Entering into - 'Close Browser' Module
+I, [2013-09-26T18:10:36.489079 #10898]  INFO -- : CHW Automation for Card Check Complete
+I, [2013-09-26T18:10:36.489199 #10898]  INFO -- : ********************  MyVanilla CHW - safari - End Execution **************************
+I, [2013-09-26T18:10:36.675256 #10898]  INFO -- : Saving PDF Results
+I, [2013-09-26T18:10:37.090211 #10898]  INFO -- : Sending Results in an email
