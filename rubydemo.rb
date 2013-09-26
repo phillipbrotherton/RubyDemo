@@ -48,10 +48,19 @@ end
 pdf.text "Logger Details of Ruby Automation Script", :style => :bold_italic
 pdf.stroke_horizontal_rule
 pdf.move_down 10
+pdf.text "Ruby - MyVanilla CHW Automation script execution started", :style => :bold_italic
+pdf.move_down 10
 
 browsers.each do |browser_new| 
   $LOG.info "********************  MyVanilla CHW - #{browser_new} - Start Execution **************************" 
+    
+    pdf.move_down 20
+    pdf.stroke_horizontal_rule
+    pdf.move_down 5
     pdf.text "Browser - #{browser_new}", :style => :bold_italic
+    pdf.move_down 5
+    pdf.stroke_horizontal_rule
+    
     pdf.move_down 20
     pdf.text "#{Time.now} : MyVanilla - #{browser_new} - Ruby Automation Script - Start Execution"
 
@@ -236,19 +245,22 @@ browsers.each do |browser_new|
     pdf.move_down 10
     pdf.stroke_horizontal_rule
     pdf.move_down 10
-    
+    if browser_new == "safari"
+      pdf.text "Ruby - MyVanilla CHW Automation script execution completed", :style => :bold_italic
+    end 
+    pdf.bounding_box([pdf.bounds.right - 50, pdf.bounds.bottom], :width => 60, :height => 20) do
+      pagecount = pdf.page_count
+      pdf.text "Page #{pagecount}"
+    end
+     
+      
 end
 
 #Send Email
 TerminalNotifier.notify "Sending Results in an email"
 $LOG.info "Sending Results in an email"
-pdf.text "#{Time.now} : Sending Results in an email"
-pdf.move_down 10
-pdf.stroke_horizontal_rule
-pdf.bounding_box([pdf.bounds.right - 50, pdf.bounds.bottom], :width => 60, :height => 20) do
-  pagecount = pdf.page_count
-  pdf.text "Page #{pagecount}"
-end
+
+
 
 pdf.render_file "CHW_Automation.pdf"
 
