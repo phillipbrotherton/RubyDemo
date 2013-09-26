@@ -1,4 +1,6 @@
-#Common functions 
+#MyVanilla Ruby - CHW - Common Functions
+#Developed by Raghuram Pulijala
+#File : common_functions.rb
 
 module CHWCommonFunctions
   def open_new_browser

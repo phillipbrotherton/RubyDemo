@@ -1,4 +1,5 @@
-#Check MyVanilla Debit Card Balance
+#MyVanilla Ruby - CHW - Automation Driver Script
+#Developed by Raghuram Pulijala
 #File : rubytest.rb
 
 require 'rubygems'                  # For Ruby Scripting
