@@ -67,19 +67,22 @@ browsers.each do |browser_new|
     pdf.text "#{Time.now} : MyVanilla - #{browser_new} - Ruby Automation Script - Start Execution"
 
   #Using Terminal Notifier
-    TerminalNotifier.notify "MyVanilla CHW - #{browser_new} - Start Execution"
-
+    
+    TerminalNotifier.notify "MyVanilla CHW - #{browser_new} - Start Execution", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
   #Using TestData.xls to fetch Id,pwd
     $LOG.info "Entering into - 'Create Excel object' .. " 
     pdf.text "#{Time.now} : Entering into - 'Create Excel object' .. " 
-    TerminalNotifier.notify "Creating Excel Object"
+    TerminalNotifier.notify "Creating Excel Object", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
     excel_file = File.join(File.dirname(__FILE__), "", "testdata.xls") 
     excel_book = Spreadsheet.open excel_file
     sheet1 = excel_book.worksheet(0) # first sheet
-    TerminalNotifier.notify "Fetching Test Data from XLS"
-
+    TerminalNotifier.notify "Fetching Test Data from XLS", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
   #Open New Browser
-    TerminalNotifier.notify "Opening a new Browser Instance"
+    TerminalNotifier.notify "Opening a new Browser Instance", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
 
     browser=Watir::Browser.new:"#{browser_new}"
     $LOG.info "Opening new #{browser_new} Browser instance......" 
@@ -87,8 +90,9 @@ browsers.each do |browser_new|
     browser.driver.manage.window.maximize
 
   #Access MyVanilla CHW
-    TerminalNotifier.notify "Opening MyVanilla CHW"
-
+    
+    TerminalNotifier.notify "Opening MyVanilla CHW", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
     browser.goto url
 
   #Browser wait
@@ -97,8 +101,9 @@ browsers.each do |browser_new|
   #Check if CHW is loaded
     $LOG.info "Go to - #{url}" 
     pdf.text "#{Time.now} : Go to - #{url}"
-    TerminalNotifier.notify "Checking MyVanilla CHW"
-
+    
+    TerminalNotifier.notify "Checking MyVanilla CHW", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
     $LOG.info "Entering into - 'Check if CHW is loaded' .. " 
     pdf.text "#{Time.now} : Entering into - 'Check if CHW is loaded' .. "
     if browser.div(:id, "signup_form").exists?
@@ -121,8 +126,8 @@ browsers.each do |browser_new|
     login, password = row[1], row[2] 
     $LOG.info "Fetching UserID and Password.." 
     pdf.text "#{Time.now} : Fetching UserID and Password." 
-    TerminalNotifier.notify "Setting MyVanilla CHW uid and pwd"
-  
+    TerminalNotifier.notify "Setting MyVanilla CHW uid and pwd", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
   #Set Uid
     browser.div(:id, "signup_form").flash
     browser.text_field(:id=>'user_id').set(login)
@@ -137,19 +142,22 @@ browsers.each do |browser_new|
     end 
     
   #Validating CHW Account page
-    TerminalNotifier.notify "Validating MyVanilla CHW - Account Module"
-
+    
+    TerminalNotifier.notify "Validating MyVanilla CHW - Account Module", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
     $LOG.info "Entering into - 'CHW Account Module' .." 
     pdf.text "#{Time.now} : Entering into - 'CHW Account Module' .."
     browser.wait_until {browser.div(:id, "summary").exists? }
     if browser.div(:id, "summary").exists?
       $LOG.info "MyVanilla CHW - Login successful" 
       pdf.text "#{Time.now} : MyVanilla CHW - Login - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-      TerminalNotifier.notify "MyVanilla CHW - Login successful"
+      TerminalNotifier.notify "MyVanilla CHW - Login successful", title: "MyVanilla-#{browser_new}-Execution"
+      sleep 2    
     else
       $LOG.error "MyVanila CHW - Login failed - Please Check" 
       pdf.text "#{Time.now} : MyVanila CHW - Login failed - Please Check"
-      TerminalNotifier.notify "MyVanilla CHW - Login Failed"
+      TerminalNotifier.notify "MyVanilla CHW - Login Failed", title: "MyVanilla-#{browser_new}-Execution"
+      sleep 2
     end  
 
   #Checking Balance
@@ -158,133 +166,162 @@ browsers.each do |browser_new|
     if strAccBal.include? "$30.00"
      $LOG.info "CHW Account Balance - Check - #{strAccBal} - Success"
      pdf.text "#{Time.now} : CHW Account Balance - Check  - #{strAccBal} - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-
-     TerminalNotifier.notify "Balance Check - Success" 
+     TerminalNotifier.notify "Balance Check - Success", title: "MyVanilla-#{browser_new}-Execution" 
+     sleep 2
     else
      $LOG.error "CHW Account Balance - Check' failed"
      pdf.text "#{Time.now} : CHW Account Balance - Check' failed"
-      TerminalNotifier.notify "Balance Check - Failed"
+     TerminalNotifier.notify "Balance Check - Failed", title: "MyVanilla-#{browser_new}-Execution"
+     sleep 2
     end
 
   #Check Card Status
+    browser.element(:xpath => "/html/body/div[2]/div/section/dl/dd[3]").flash
     strCardStatus = browser.element(:xpath => "/html/body/div[2]/div/section/dl/dd[3]").text
     if strCardStatus.include? "active"
       $LOG.info "CHW Card Status - Check' successful -  Card Status - Active"
       pdf.text "#{Time.now} : CHW Card Status - Check- Active - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-      TerminalNotifier.notify "Card Status - Active" 
+      TerminalNotifier.notify "Card Status - Active", title: "MyVanilla-#{browser_new}-Execution" 
+      sleep 2
     else
       $LOG.error "CHW Card Status - Check' Failed -  Card Status - Inactive/Unknown"
       pdf.text "#{Time.now} : CHW Card Status - Check' Failed -  Card Status - Inactive/Unknown"
-      TerminalNotifier.notify "Card Status - Failed"
+      TerminalNotifier.notify "Card Status - Failed", title: "MyVanilla-#{browser_new}-Execution"
+      sleep 2
     end
       
   #Check Exp Date  
+    browser.element(:xpath => "/html/body/div[2]/div/section/dl/dd[2]").flash
     strExpDate = browser.element(:xpath => "/html/body/div[2]/div/section/dl/dd[2]").text
     if strExpDate.include? "06/15"
       $LOG.info "CHW Exp Date - #{strExpDate} - Check' successful"
       pdf.text "#{Time.now} : CHW Exp Date - #{strExpDate} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-      TerminalNotifier.notify "CHW Exp Date - #{strExpDate} - Check successful" 
+      TerminalNotifier.notify "CHW Exp Date - #{strExpDate} - Check successful", title: "MyVanilla-#{browser_new}-Execution" 
+      sleep 2
     else
       $LOG.info "CHW Exp Date  Check' failed"
       pdf.text "#{Time.now} : CHW Exp Date - Check failed"
-      TerminalNotifier.notify "CHW Exp Date - Check failed" 
+      TerminalNotifier.notify "CHW Exp Date - Check failed", title: "MyVanilla-#{browser_new}-Execution" 
+      sleep 2
     end
       
   #Transactions
+    browser.element(:xpath => "/html/body/div[2]/div/aside/nav/ul/li[2]/a").flash
     browser.element(:xpath => "/html/body/div[2]/div/aside/nav/ul/li[2]/a").click   #Statements Link
-    sleep 5
+    sleep 6
     $LOG.info "Statements Page loaded"
     pdf.text "#{Time.now} : Statements Page loaded"
-    TerminalNotifier.notify "Statements Page loaded"
+    TerminalNotifier.notify "Statements Page loaded", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
+    browser.element(:xpath => "/html/body/div[2]/div/section/fieldset/table/tbody/tr/td[2]/div").flash
     if browser.element(:xpath => "/html/body/div[2]/div/section/fieldset/table/tbody/tr/td[2]/div").exist?
       strTransInfo = browser.element(:xpath => "/html/body/div[2]/div/section/fieldset/table/tbody/tr/td[2]/div").text
       if strTransInfo.include? "CVS Pharmacy"
         $LOG.info "Trans Details - #{strTransInfo} - Check successful"
         pdf.text "#{Time.now} : Trans Details - #{strTransInfo} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-        TerminalNotifier.notify "Trans Details - #{strTransInfo} - Check successful" 
+        TerminalNotifier.notify "Trans Details - #{strTransInfo} - Check successful", title: "MyVanilla-#{browser_new}-Execution" 
+        sleep 2
       else
         $LOG.info "Trans Details  Check' failed"
         pdf.text "#{Time.now} : Trans Details - Check failed"
-        TerminalNotifier.notify "Trans Details - Check failed"
+        TerminalNotifier.notify "Trans Details - Check failed", title: "MyVanilla-#{browser_new}-Execution"
+        sleep 2
       end
     end  
       
   #Check Profile page
+    browser.element(:xpath => "/html/body/header/div/nav[2]/ul/li/ul/li[3]/a").flash
     if browser.element(:xpath => "/html/body/header/div/nav[2]/ul/li/ul/li[3]/a").exists?
       browser.element(:xpath => "/html/body/header/div/nav[2]/ul/li/ul/li[3]/a").click
-      sleep 5
+      sleep 6
       $LOG.info "Card Holder Information Page loaded"
       pdf.text "#{Time.now} : Card Holder Information Page loaded - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-      TerminalNotifier.notify "Card Holder Information Page loaded" 
+      TerminalNotifier.notify "Card Holder Information Page loaded", title: "MyVanilla-#{browser_new}-Execution" 
+      sleep 2
     else
       $LOG.error "Card Holder Information Page - Error"
       pdf.text "#{Time.now} : Card Holder Information Page Error"
-      TerminalNotifier.notify "Card Holder Information Page - Error"
+      TerminalNotifier.notify "Card Holder Information Page - Error", title: "MyVanilla-#{browser_new}-Execution"
+      sleep 2
     end
       
   #First Name Last Name Check
     strFirstName = browser.element(:xpath => "/html/body/div[2]/div/section/form/fieldset/ul/li/div").text
+    browser.element(:xpath => "/html/body/div[2]/div/section/form/fieldset/ul/li/div").flash
     strLastName = browser.element(:xpath => "/html/body/div[2]/div/section/form/fieldset/ul/li/div[2]").text
+    browser.element(:xpath => "/html/body/div[2]/div/section/form/fieldset/ul/li/div[2]").flash
 
     if strFirstName.include? "Raghuram" 
       if strLastName.include? "Pulijala"
       $LOG.info "#{strLastName} - Check successful"
       pdf.text "#{Time.now} : #{strLastName} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-      TerminalNotifier.notify "#{strLastName} - Card Holder Info - Name Check"
+      TerminalNotifier.notify "#{strLastName} - Card Holder Info - Name Check", title: "MyVanilla-#{browser_new}-Execution"
+      sleep 2
       $LOG.info "#{strFirstName} - Check successful"
       pdf.text "#{Time.now} :  #{strFirstName}- Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-      TerminalNotifier.notify "#{strFirstName} - Card Holder Info - Name Check"
+      TerminalNotifier.notify "#{strFirstName} - Card Holder Info - Name Check", title: "MyVanilla-#{browser_new}-Execution"
+      sleep 2
       end
     else
       $LOG.info "Name - Check Failed"
       pdf.text "#{Time.now} : Name - Check Failed"
-      TerminalNotifier.notify "Card Holder Info - Name Check failed"
+      TerminalNotifier.notify "Card Holder Info - Name Check failed", title: "MyVanilla-#{browser_new}-Execution"
+      sleep 2
     end  
    
   #Email Check
    strEmail = browser.element(:xpath => "//*[@id='emailAddress']").value
+   browser.element(:xpath => "//*[@id='emailAddress']").flash
     if strEmail.include? "raghuram.pulijala@hotmail.com"
       $LOG.info "Email - #{strEmail} - Check successful"
       pdf.text "#{Time.now} : Email - #{strEmail} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-      TerminalNotifier.notify "Email - Check successful"
+      TerminalNotifier.notify "Email - Check successful", title: "MyVanilla-#{browser_new}-Execution"
+      sleep 2
     else
       $LOG.info "Email - #{strEmail} - Check Failed"
       pdf.text "#{Time.now} : Email - #{strEmail} - Check Failed"
-      TerminalNotifier.notify "Email - Check failed"
+      TerminalNotifier.notify "Email - Check failed", title: "MyVanilla-#{browser_new}-Execution"
+      sleep 2
     end
   
   #Mobile Phone Num Check
     strMobNum = browser.element(:xpath => "//*[@id='secondaryPhoneNumber']").value
+    browser.element(:xpath => "//*[@id='secondaryPhoneNumber']").flash
      if strEmail.include? "raghuram.pulijala@hotmail.com"
        $LOG.info "Mob Num - #{strMobNum} - Check successful"
        pdf.text "#{Time.now} : Mob Num - #{strMobNum} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-       TerminalNotifier.notify "Mob Num - #{strMobNum} - Check successful"
+       TerminalNotifier.notify "Mob Num - #{strMobNum} - Check successful", title: "MyVanilla-#{browser_new}-Execution"
+       sleep 2
      else
        $LOG.info "Mob Num - #{strMobNum} - Check Failed"
        pdf.text "#{Time.now} : Mob Num - #{strMobNum} - Check Failed"
-       TerminalNotifier.notify "Mob Num - #{strMobNum} - Check failed"
+       TerminalNotifier.notify "Mob Num - #{strMobNum} - Check failed", title: "MyVanilla-#{browser_new}-Execution"
+       sleep 2
      end
      
   #City Check
   
   strCity = browser.element(:xpath => "//*[@id='street_city']").value
+  browser.element(:xpath => "//*[@id='street_city']").flash
    if strCity.include? "Alpharetta"
      $LOG.info "City - #{strCity} - Check successful"
      pdf.text "#{Time.now} : City - #{strCity} - Check - <color rgb='347235'><b>Success</b></color>",:inline_format => true
-     TerminalNotifier.notify "City - #{strCity} - Check successful"
+     TerminalNotifier.notify "City - #{strCity} - Check successful", title: "MyVanilla-#{browser_new}-Execution"
+     sleep 2
    else
      $LOG.info "City - #{strCity} - Check Failed"
      pdf.text "#{Time.now} : City - #{strCity} - Check Failed"
-     TerminalNotifier.notify "City - #{strCity} - Check failed"
+     TerminalNotifier.notify "City - #{strCity} - Check failed", title: "MyVanilla-#{browser_new}-Execution"
    end
-    sleep 5
+    sleep 2
 
   #Signing Out of CHW
 
-    TerminalNotifier.notify "Signing out of CHW"
+    TerminalNotifier.notify "Signing out of CHW", title: "MyVanilla-#{browser_new}-Execution"
     pdf.text "#{Time.now} : Signing out of CHW"
     browser.link(:text, "Sign Out").click
     browser.wait_until {browser.div(:id, "signup_form").exists? }
+    browser.div(:id, "signup_form").flash
     if browser.div(:id, "signup_form").exists?
       $LOG.info "CHW MyVanilla - Sign Out complete"
       pdf.text "#{Time.now} : CHW MyVanilla - Sign Out complete - <color rgb='347235'><b>Success</b></color>",:inline_format => true
@@ -294,9 +331,9 @@ browsers.each do |browser_new|
     end  
   
   #Close Browser
-    TerminalNotifier.notify "#{browser_new} - Closing the Browser"
+    TerminalNotifier.notify "#{browser_new} - Closing the Browser", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
 
-    sleep 3
     $LOG.info "Entering into - 'Close Browser' Module" 
     pdf.text "#{Time.now} : Entering into - #{browser_new} - 'Close Browser' Module" 
     browser.close
@@ -306,7 +343,8 @@ browsers.each do |browser_new|
     $LOG.info "********************  MyVanilla CHW - #{browser_new} - End Execution **************************"
     pdf.text "#{Time.now} : CHW Automation for Card Check Complete - <color rgb='347235'><b>Success</b></color>",:inline_format => true
     pdf.text "#{Time.now} : MyVanilla CHW - #{browser_new} - End Execution"
-    TerminalNotifier.notify "MyVanilla CHW - #{browser_new} - End Execution"
+    TerminalNotifier.notify "MyVanilla CHW - #{browser_new} - End Execution", title: "MyVanilla-#{browser_new}-Execution"
+    sleep 2
     pdf.move_down 10
     pdf.stroke_horizontal_rule
     pdf.move_down 10
@@ -327,6 +365,7 @@ end
 #Send Formatted HTML Mail along with Log/Report - Function in CommonFunctions
   send_mail
   TerminalNotifier.notify "Sending Results in an email"
+  sleep 2
   $LOG.info "Sending Results in an email"
   
 #Open Log file
