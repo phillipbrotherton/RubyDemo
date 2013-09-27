@@ -364,7 +364,7 @@ end
 
 #Send Formatted HTML Mail along with Log/Report - Function in CommonFunctions
   send_mail
-  TerminalNotifier.notify "Sending Results in an email"
+  TerminalNotifier.notify "Sending Results in an email", title: "MyVanilla-Ruby-Execution"
   sleep 2
   $LOG.info "Sending Results in an email"
   
