@@ -1,0 +1,1 @@
+This is a Ruby Demo project intended to be open source. The function of the script is to use Automation to test basic UI and functionality of MyVanilla Card holder Website in Chrome,Firefox and Safari browsers, log the results in PDF format and send a HTML formatted email to a list
