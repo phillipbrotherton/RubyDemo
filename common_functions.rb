@@ -26,6 +26,19 @@ module CHWCommonFunctions
   end
   def send_mail
     to_addresses = [
+      #'mnelson@incomm.com',
+      #'sjain@incomm.com',
+      #'msmith@incomm.com',
+      #'pkothapally@incomm.com',
+      #'sdaggula@incomm.com',
+      #'mgoldenberg@incomm.com',
+      #'rettenger@incomm.com',
+      #'djadhav@incomm.com',
+      #'gsanders@incomm.com',
+      #'mlukaart@incomm.com',
+      #'bschultz@incomm.com',
+      #'twalker@incomm.com',
+      #'oescovar@incomm.com',
       'rpulijala@incomm.com'
     ]
     cc_addresses = [
@@ -36,7 +49,7 @@ module CHWCommonFunctions
       :to => to_addresses,
       :cc => cc_addresses,
       :from => 'raghuram.pulijala@gmail.com', 
-      :subject => 'MyVanilla CHW Automation Results - PDF Report',
+      :subject => 'Ruby - MyVanilla CHW Automation Results - PDF Report',
       :html_body => '
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>
 
