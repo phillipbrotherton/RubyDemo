@@ -213,8 +213,9 @@ browsers.each do |browser_new|
     pdf.text "#{Time.now} : Statements Page loaded"
     TerminalNotifier.notify "Statements Page loaded", title: "MyVanilla-#{browser_new}-Execution"
     sleep 2
-    browser.element(:xpath => "/html/body/div[2]/div/section/fieldset/table/tbody/tr/td[2]/div").flash
+    
     if browser.element(:xpath => "/html/body/div[2]/div/section/fieldset/table/tbody/tr/td[2]/div").exist?
+      browser.element(:xpath => "/html/body/div[2]/div/section/fieldset/table/tbody/tr/td[2]/div").flash
       strTransInfo = browser.element(:xpath => "/html/body/div[2]/div/section/fieldset/table/tbody/tr/td[2]/div").text
       if strTransInfo.include? "CVS Pharmacy"
         $LOG.info "Trans Details - #{strTransInfo} - Check successful"
